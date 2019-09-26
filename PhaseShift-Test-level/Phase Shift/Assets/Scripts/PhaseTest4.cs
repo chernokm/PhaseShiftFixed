@@ -48,6 +48,9 @@ public class PhaseTest4 : MonoBehaviour
     public GameObject teleportTarget3;
     public GameObject teleportTarget4;
 
+   // public AudioClip teleportClip;
+    public AudioSource teleportSound;
+
     // Initializing the bools as false
     public bool teleportTriggerBool1 = false;
     public bool teleportTriggerBool2 = false;
@@ -65,6 +68,7 @@ public class PhaseTest4 : MonoBehaviour
 
 	void Start()
 	{
+        //teleportSource.clip = teleportClip;
 		audio = GetComponent<AudioSource>();
 		flashImage.enabled = false;
 		firstPersonController = FindObjectOfType<RigidbodyFirstPersonController>();
@@ -107,6 +111,7 @@ public class PhaseTest4 : MonoBehaviour
         
 		if (Input.GetButtonDown("Interact"))
 		{
+            //teleportSound.Play();
 			Shift();
 		}
 	}
@@ -117,6 +122,7 @@ public class PhaseTest4 : MonoBehaviour
         if (teleportTriggerBool1 == true)
         {
             // If the first trigger bool is true, the player is sent to target 1 then the bool is set to its initial state
+            //Countdown();
             thePlayer.transform.position = teleportTarget1.transform.position;
             teleportTriggerBool1 = false;
         }
