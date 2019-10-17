@@ -48,9 +48,6 @@ public class PhaseTest4 : MonoBehaviour
     public GameObject teleportTarget3;
     public GameObject teleportTarget4;
 
-   // public AudioClip teleportClip;
-    public AudioSource teleportSound;
-
     // Initializing the bools as false
     public bool teleportTriggerBool1 = false;
     public bool teleportTriggerBool2 = false;
@@ -60,15 +57,11 @@ public class PhaseTest4 : MonoBehaviour
     // Sets the player as a game object
     public GameObject thePlayer;
     
-
-
 	private RigidbodyFirstPersonController firstPersonController;
 	private new AudioSource audio;
 
-
 	void Start()
 	{
-        //teleportSource.clip = teleportClip;
 		audio = GetComponent<AudioSource>();
 		flashImage.enabled = false;
 		firstPersonController = FindObjectOfType<RigidbodyFirstPersonController>();
@@ -83,7 +76,6 @@ public class PhaseTest4 : MonoBehaviour
         if (gameObject == teleportTrigger1)
         {
             teleportTriggerBool1 = true;
-            
         }
         else if (gameObject == teleportTrigger2)
         {
@@ -97,9 +89,10 @@ public class PhaseTest4 : MonoBehaviour
         {
             teleportTriggerBool4 = true;
         }
+
         
-		
-	}
+
+    }
 
 	void OnTriggerExit(Collider other)
 	{
@@ -108,10 +101,8 @@ public class PhaseTest4 : MonoBehaviour
 
 	void OnTriggerStay(Collider other) //Dimension hopping, folks, all aboard
 	{
-        
 		if (Input.GetButtonDown("Interact"))
 		{
-            //teleportSound.Play();
 			Shift();
 		}
 	}
@@ -122,7 +113,6 @@ public class PhaseTest4 : MonoBehaviour
         if (teleportTriggerBool1 == true)
         {
             // If the first trigger bool is true, the player is sent to target 1 then the bool is set to its initial state
-            //Countdown();
             thePlayer.transform.position = teleportTarget1.transform.position;
             teleportTriggerBool1 = false;
         }
@@ -144,53 +134,9 @@ public class PhaseTest4 : MonoBehaviour
             thePlayer.transform.position = teleportTarget4.transform.position;
             teleportTriggerBool4 = false;
         }
-        
-        /* ====== OLD CODE ======
-         
-		StartCoroutine(Countdown()); //used for the VFX and SFX
-		if (toDimension1 == true)
-		{
-			if (backToDimension1 == true)
-			{
-				firstPersonController.enabled = false;
-				firstPersonController.transform.position = D1TeleportReEntry.transform.position;
-				firstPersonController.enabled = true;
-				Debug.Log("Travel backwards to dimension 1 from a dimension 2 portal");
-			}
-			else if (backToDimension1 == false)
-			{
-				firstPersonController.enabled = false;
-				firstPersonController.transform.position = D1TeleportEntry.transform.position;
-				firstPersonController.enabled = true;
-				Debug.Log("Travel to dimension 1, but the opposite side of the room.");
-			}
-		}
-		else if (toDimension2 == true)
-		{
-			if (backToDimension2 == true)
-			{
-				firstPersonController.enabled = false;
-				firstPersonController.transform.position = D2TeleportReEntry.transform.position;
-				firstPersonController.enabled = true;
-				Debug.Log("Travel backwards to dimension 2 from a dimension 1 portal");
-			}
-			else if (backToDimension2 == false)
-			{
-				firstPersonController.enabled = false; //Problem
-				firstPersonController.transform.position = D2TeleportEntry.transform.position;
-				firstPersonController.enabled = true;
-				Debug.Log("Travel to dimension 2.");
-			}
-		}
-        */
-	}
 
-	private IEnumerator Countdown() //used to create the dramatic flash when teleporting
-	{
-		flashImage.enabled = true;
-		audio.PlayOneShot(teleport, 1);
-		yield return new WaitForSeconds(0.1f);
-		flashImage.enabled = false;
-		interactText.text = "";
-	}
+        
+
+    }
+
 }
